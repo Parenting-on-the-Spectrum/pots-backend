@@ -1,17 +1,16 @@
-import { Client } from 'pg';
-
+import { Pool } from 'pg';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const client = new Client({
-  user: 'postgres',
-  database: 'spectrum',
+const pool = new Pool({
+  user: process.env.user,
+  database: process.env.database,
   port: 5432,
   password: process.env.PASSWORD
 });
 
-client.connect()
-  .then(() => console.log('connected to db'))
-  .catch(err => console.log('connection error', err));
-
-module.exports.client = client;
+export default {
+  query: (text: string) => pool.query(text),
+  end: () => pool.end(),
+  pool
+}
