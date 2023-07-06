@@ -19,10 +19,13 @@
   "homepage": "https://github.com/The-Frying-Pans/pots-backend#readme",
   "dependencies": {
     "@types/node": "^20.3.2",
+    "@types/pg": "^8.10.2",
     "dev2": "nodemon --exec ts-node src/server/index.ts",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-promise-router": "^4.1.1",
     "nodemon": "^2.0.22",
+    "pg": "^8.11.1",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
