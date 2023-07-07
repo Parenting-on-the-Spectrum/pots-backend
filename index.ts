@@ -9,18 +9,15 @@ const app: Express = express();
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Look hands, no mom!');
+  res.sendStatus(200);
 });
 
-app.get('/work', (req: Request, res: Response) => {
-  res.send('this is a test work');
-});
-
-app.get('/first', (req: Request, res: Response) => {
+app.get('/leaders', (req: Request, res: Response) => {
   Pool.query('SELECT * FROM leaders')
   .then((data) => {
-    console.log(data)
+    res.send(data.rows).status(200)
   })
+  .catch((err) => res.send(err).status(500))
 });
 
 
