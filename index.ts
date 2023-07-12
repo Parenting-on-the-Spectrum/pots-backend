@@ -1,7 +1,11 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import Pool from './db';
+import mongoose from './mongo'
+// import mongoose from './mongo'
 dotenv.config();
+
+// mongoose.mongoConnect();
 
 const app: Express = express();
 
@@ -11,6 +15,10 @@ app.use(express.json());
 app.get('/', (req: Request, res: Response) => {
   res.sendStatus(200);
 });
+
+// app.get('/mongo', (req: Request, res: Response) => {
+//   mongoose.query()
+// });
 
 app.get('/leaders', (req: Request, res: Response) => {
   Pool.query('SELECT * FROM leaders')
