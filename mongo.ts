@@ -1,7 +1,5 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-const { Schema } = mongoose;
-
 dotenv.config();
 
 
