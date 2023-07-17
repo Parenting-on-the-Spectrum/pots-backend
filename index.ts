@@ -1,6 +1,8 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import Pool from './db';
+import {connectToDatabase, collections} from './mongo';
+// import { ObjectId } from "mongodb";
+// import Game from "../models/game";
 dotenv.config();
 
 const app: Express = express();
@@ -12,15 +14,37 @@ app.get('/', (req: Request, res: Response) => {
   res.sendStatus(200);
 });
 
+connectToDatabase();
 
-app.get('/leaders', (req: Request, res: Response) => {
-  Pool.query('SELECT * FROM leaders')
-  .then((data) => {
-    console.log(data.rows)
-    res.send(data.rows).status(200)
-  })
-  .catch((err) => res.send(err).status(500))
+app.get('/leaders', async (req: Request, res: Response) => {
+  try {
+    const leads = (await collections.leaders.find({}).toArray());
+     res.status(200).send(leads);
+ } catch (error) {
+     res.status(500).send(error.message);
+ }
 });
+
+
+const port = process.env.PORT || 1128;
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${process.env.PORT}`);
+});
+
+/*
+Here are the PostgreSQL queries. I'm not deleting them just yet, just in case I'll
+need to change back to the database
+
+// import Pool from './db';
+
+// app.get('/leaders', (req: Request, res: Response) => {
+//   Pool.query('SELECT * FROM leaders')
+//   .then((data) => {
+//     console.log(data.rows)
+//     res.send(data.rows).status(200)
+//   })
+//   .catch((err) => res.send(err).status(500))
+// });
 
 // app.get('/socials', (req: Request, res: Response) => {
 //   interface Media {
@@ -80,7 +104,4 @@ app.get('/leaders', (req: Request, res: Response) => {
 //   .catch((err) => res.send(err).status(500))
 // });
 
-const port = process.env.PORT || 1128;
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${process.env.PORT}`);
-});
+*/
