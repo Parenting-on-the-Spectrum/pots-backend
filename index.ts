@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import {connectToDatabase, collections} from './mongo';
 import Leaders from "./models/leaders";
+import TipsAndTricks from "./models/tipsTricks";
 dotenv.config();
 
 const app: Express = express();
@@ -21,6 +22,16 @@ app.get('/leaders', async (req: Request, res: Response) => {
     leads.sort((a, b) => a.priority - b.priority)
      res.status(200).send(leads);
  } catch (error) {
+     res.status(500).send(error.message);
+ }
+});
+
+app.get('/tipstricks', async (req: Request, res: Response) => {
+  try {
+    const tip = (await collections.tipstricks.find({}).toArray()) as TipsAndTricks[];
+     res.status(200).send(tip);
+ } catch (error) {
+  console.log(error)
      res.status(500).send(error.message);
  }
 });
