@@ -17,8 +17,10 @@ export async function connectToDatabase() {
   // name the collections here
   const leaders: mongoDB.Collection = db.collection('leaders');
   const tipstricks: mongoDB.Collection = db.collection('tipstricks');
+  const resources: mongoDB.Collection = db.collection('resources');
   // define the export collections
   collections.leaders = leaders;
   collections.tipstricks = tipstricks;
+  collections.resources = resources;
   console.log(`Successfully connected to database: ${db.databaseName}`);
 }
