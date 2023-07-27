@@ -39,7 +39,7 @@ app.get('/tipstricks', async (req: Request, res: Response) => {
 
 app.get('/resources', async (req: Request, res: Response) => {
   var sorted = {
-    provider: [],
+    providers: [],
     community: [],
   };
   try {
