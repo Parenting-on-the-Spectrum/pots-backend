@@ -45,7 +45,7 @@ app.get('/resources', async (req: Request, res: Response) => {
   try {
     const resc = (await collections.resources.find({}).toArray()) as Resources[];
     resc.forEach((x) => {
-      if (x.type === 'ABA Provider') { sorted.provider.push(x)}
+      if (x.type === 'ABA Provider') { sorted.providers.push(x)}
       else if (x.type === 'Community Resource') { sorted.community.push(x)}
     })
      res.status(200).send(sorted);
