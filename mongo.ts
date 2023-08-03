@@ -5,7 +5,8 @@ dotenv.config();
 
 export const collections: {
   leaders?: any, socials?: mongoDB.Collection, videos?: mongoDB.Collection,
-  tipstricks?: mongoDB.Collection, resources?: mongoDB.Collection
+  tipstricks?: mongoDB.Collection, resources?: mongoDB.Collection,
+  usageAPI?: mongoDB.Collection, users?: mongoDB.Collection
 } = {}
 
 export async function connectToDatabase() {
@@ -18,9 +19,13 @@ export async function connectToDatabase() {
   const leaders: mongoDB.Collection = db.collection('leaders');
   const tipstricks: mongoDB.Collection = db.collection('tipstricks');
   const resources: mongoDB.Collection = db.collection('resources');
+  const usageAPI: mongoDB.Collection = db.collection('usageAPI');
+  const users: mongoDB.Collection = db.collection('users');
   // define the export collections
   collections.leaders = leaders;
   collections.tipstricks = tipstricks;
   collections.resources = resources;
+  collections.usageAPI = usageAPI;
+  collections.users = users;
   console.log(`Successfully connected to database: ${db.databaseName}`);
 }
