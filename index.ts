@@ -1,9 +1,10 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import {connectToDatabase, collections} from './mongo';
+import { connectToDatabase, collections } from './mongo';
 import Leaders from "./models/leaders";
 import TipsAndTricks from "./models/tipsTricks";
 import Resources from "./models/resources";
+import UsageAPI from "./models/usage";
 dotenv.config();
 
 const app: Express = express();
@@ -21,20 +22,20 @@ app.get('/leaders', async (req: Request, res: Response) => {
   try {
     const leads = (await collections.leaders.find({}).toArray()) as Leaders[];
     leads.sort((a, b) => a.priority - b.priority)
-     res.status(200).send(leads);
- } catch (error) {
-     res.status(500).send(error.message);
- }
+    res.status(200).send(leads);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 });
 
 app.get('/tipstricks', async (req: Request, res: Response) => {
   try {
     const tip = (await collections.tipstricks.find({}).toArray()) as TipsAndTricks[];
-     res.status(200).send(tip);
- } catch (error) {
-  console.log(error)
-     res.status(500).send(error.message);
- }
+    res.status(200).send(tip);
+  } catch (error) {
+    console.log(error)
+    res.status(500).send(error.message);
+  }
 });
 
 app.get('/resources', async (req: Request, res: Response) => {
@@ -45,14 +46,22 @@ app.get('/resources', async (req: Request, res: Response) => {
   try {
     const resc = (await collections.resources.find({}).toArray()) as Resources[];
     resc.forEach((x) => {
-      if (x.type === 'ABA Provider') { sorted.providers.push(x)}
-      else if (x.type === 'Community Resource') { sorted.community.push(x)}
+      if (x.type === 'ABA Provider') { sorted.providers.push(x) }
+      else if (x.type === 'Community Resource') { sorted.community.push(x) }
     })
-     res.status(200).send(sorted);
- } catch (error) {
-  console.log(error)
-     res.status(500).send(error.message);
- }
+    res.status(200).send(sorted);
+  } catch (error) {
+    console.log(error)
+    res.status(500).send(error.message);
+  }
+});
+
+app.post('/usage', async (req: Request, res: Response) => {
+  try {
+    console.log(req)
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 });
 
 
