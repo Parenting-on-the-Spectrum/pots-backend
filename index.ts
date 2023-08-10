@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
+import axios from 'axios';
 import { connectToDatabase, collections } from './mongo';
 import Leaders from "./models/leaders";
 import TipsAndTricks from "./models/tipsTricks";
@@ -63,6 +64,20 @@ app.post('/usage', async (req: Request, res: Response) => {
     res.status(500).send(error.message);
   }
 });
+
+app.get('/kideos', (req: Request, res: Response) => {
+  axios.get('https://www.googleapis.com/youtube/v3/search', {params: {
+    q: 'ms. rachel',
+    part: 'snippet',
+    key: `${process.env.YT_KEY}`
+  }})
+  .then((vids) => {
+    res.send(vids.data.items).status(200)
+  })
+  .catch(() => {
+    res.sendStatus(500);
+  })
+})
 
 
 const port = process.env.PORT || 1128;
