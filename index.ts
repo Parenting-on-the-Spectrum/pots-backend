@@ -74,7 +74,8 @@ app.get('/kideos', (req: Request, res: Response) => {
   .then((vids) => {
     res.send(vids.data.items).status(200)
   })
-  .catch(() => {
+  .catch((err) => {
+    console.log(err.headers)
     res.sendStatus(500);
   })
 })
