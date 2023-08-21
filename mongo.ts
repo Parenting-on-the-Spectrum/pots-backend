@@ -9,9 +9,10 @@ export const collections: {
   usageAPI?: mongoDB.Collection, users?: mongoDB.Collection
 } = {}
 
+const client: mongoDB.MongoClient = new mongoDB.MongoClient(process.env.string, { useUnifiedTopology: true });
+
 export async function connectToDatabase() {
   //create the initial mongoDB client, and await the connection
-  const client: mongoDB.MongoClient = new mongoDB.MongoClient(process.env.string, { useUnifiedTopology: true });
   await client.connect();
   // create the database const
   const db: mongoDB.Db = client.db(process.env.database);
@@ -28,4 +29,9 @@ export async function connectToDatabase() {
   collections.usageAPI = usageAPI;
   collections.users = users;
   console.log(`Successfully connected to database: ${db.databaseName}`);
+}
+
+export async function shut() {
+  // close connection
+  await client.close();
 }
