@@ -80,6 +80,21 @@ app.get('/kideos', (req: Request, res: Response) => {
   })
 })
 
+app.get('/careVids', (req: Request, res: Response) => {
+  axios.get('https://www.googleapis.com/youtube/v3/search', {params: {
+    q: 'autism help for parents',
+    part: 'snippet',
+    key: `${process.env.YT_KEY}`
+  }})
+  .then((vids) => {
+    res.send(vids.data.items).status(200)
+  })
+  .catch((err) => {
+    console.log(err.headers)
+    res.sendStatus(500);
+  })
+})
+
 
 const port = process.env.PORT || 1128;
 app.listen(port, () => {
