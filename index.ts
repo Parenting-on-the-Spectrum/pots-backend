@@ -72,7 +72,7 @@ app.get('/kideos', (req: Request, res: Response) => {
     key: `${process.env.YT_KEY}`
   }})
   .then((vids) => {
-    res.send(vids.data.items).status(200)
+    res.status(200).send(vids.data.items);
   })
   .catch((err) => {
     console.log(err.headers)
@@ -87,7 +87,7 @@ app.get('/careVids', (req: Request, res: Response) => {
     key: `${process.env.YT_KEY}`
   }})
   .then((vids) => {
-    res.send(vids.data.items).status(200)
+    res.status(200).send(vids.data.items);
   })
   .catch((err) => {
     console.log(err.headers)
