@@ -82,7 +82,7 @@ app.get('/kideos', (req: Request, res: Response) => {
 
 app.get('/careVids', (req: Request, res: Response) => {
   axios.get('https://www.googleapis.com/youtube/v3/search', {params: {
-    q: 'autism help for parents',
+    q: 'ABA for parents',
     part: 'snippet',
     key: `${process.env.YT_KEY}`
   }})
