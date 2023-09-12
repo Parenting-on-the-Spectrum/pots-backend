@@ -43,12 +43,14 @@ app.get('/resources', async (req: Request, res: Response) => {
   var sorted = {
     providers: [],
     community: [],
+    services: [],
   };
   try {
     const resc = (await collections.resources.find({}).toArray()) as Resources[];
     resc.forEach((x) => {
       if (x.type === 'ABA Provider') { sorted.providers.push(x) }
       else if (x.type === 'Community Resource') { sorted.community.push(x) }
+      else { sorted.services.push(x) }
     })
     res.status(200).send(sorted);
   } catch (error) {
@@ -94,7 +96,6 @@ app.get('/careVids', (req: Request, res: Response) => {
     res.sendStatus(500);
   })
 })
-
 
 const port = process.env.PORT || 1128;
 app.listen(port, () => {
