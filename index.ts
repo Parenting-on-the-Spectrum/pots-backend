@@ -97,6 +97,10 @@ app.get('/careVids', (req: Request, res: Response) => {
   })
 })
 
+app.get(`/${process.env.loader}`, async (req: Request, res: Response) => {
+  res.send(`${process.env.loader}`);
+});
+
 const port = process.env.PORT || 1128;
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${process.env.PORT}`);
