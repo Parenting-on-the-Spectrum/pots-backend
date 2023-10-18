@@ -71,6 +71,7 @@ app.get('/kideos', (req: Request, res: Response) => {
   axios.get('https://www.googleapis.com/youtube/v3/search', {params: {
     q: 'ms. rachel',
     part: 'snippet',
+    maxResults: '10',
     key: `${process.env.YT_KEY}`
   }})
   .then((vids) => {
@@ -86,6 +87,7 @@ app.get('/careVids', (req: Request, res: Response) => {
   axios.get('https://www.googleapis.com/youtube/v3/search', {params: {
     q: 'ABA for parents',
     part: 'snippet',
+    maxResults: '10',
     key: `${process.env.YT_KEY}`
   }})
   .then((vids) => {
