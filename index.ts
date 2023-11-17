@@ -68,35 +68,39 @@ app.post('/usage', async (req: Request, res: Response) => {
 });
 
 app.get('/kideos', (req: Request, res: Response) => {
-  axios.get('https://www.googleapis.com/youtube/v3/search', {params: {
-    q: 'ms. rachel',
-    part: 'snippet',
-    maxResults: '17',
-    key: `${process.env.YT_KEY}`
-  }})
-  .then((vids) => {
-    res.status(200).send(vids.data.items);
+  axios.get('https://www.googleapis.com/youtube/v3/search', {
+    params: {
+      q: 'ms. rachel',
+      part: 'snippet',
+      maxResults: '17',
+      key: `${process.env.YT_KEY}`
+    }
   })
-  .catch((err) => {
-    console.log(err.headers)
-    res.sendStatus(500);
-  })
+    .then((vids) => {
+      res.status(200).send(vids.data.items);
+    })
+    .catch((err) => {
+      console.log(err.headers)
+      res.sendStatus(500);
+    })
 })
 
 app.get('/careVids', (req: Request, res: Response) => {
-  axios.get('https://www.googleapis.com/youtube/v3/search', {params: {
-    q: 'ABA for parents',
-    part: 'snippet',
-    maxResults: '17',
-    key: `${process.env.YT_KEY}`
-  }})
-  .then((vids) => {
-    res.status(200).send(vids.data.items);
+  axios.get('https://www.googleapis.com/youtube/v3/search', {
+    params: {
+      q: 'ABA for parents',
+      part: 'snippet',
+      maxResults: '17',
+      key: `${process.env.YT_KEY}`
+    }
   })
-  .catch((err) => {
-    console.log(err.headers)
-    res.sendStatus(500);
-  })
+    .then((vids) => {
+      res.status(200).send(vids.data.items);
+    })
+    .catch((err) => {
+      console.log(err.headers)
+      res.sendStatus(500);
+    })
 })
 
 app.get(`/${process.env.loader}`, async (req: Request, res: Response) => {
