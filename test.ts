@@ -1,4 +1,6 @@
 import { connectToDatabase, collections, shut } from './mongo';
+import request from 'supertest';
+import app from './index';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -37,3 +39,10 @@ describe('Collection Tests', () => {
   });
 
 });
+
+// describe('Test Express Server Routes', () => {
+//   test('GET / should connect', async () => {
+//     const response = await request(app).get('/');
+//     expect(response.status).toBe(200);
+//   });
+// });

@@ -4,7 +4,7 @@
   "description": "Project-Pots-Backend",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit",
     "start": "nodemon --exec ts-node index.ts",
     "docker-build": "webpack && node ./server/index.js"
   },
