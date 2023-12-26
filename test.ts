@@ -39,10 +39,3 @@ describe('Collection Tests', () => {
   });
 
 });
-
-// describe('Test Express Server Routes', () => {
-//   test('GET / should connect', async () => {
-//     const response = await request(app).get('/');
-//     expect(response.status).toBe(200);
-//   });
-// });
